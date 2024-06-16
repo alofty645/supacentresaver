@@ -1,3 +1,22 @@
+import { Button } from "@/components/ui/button";
+import { createClient } from "@/utils/supabase/client";
+
 export default function Home() {
-  return <main>Hello</main>;
+  const fetchProducts = async () => {
+    "use server";
+    const supabase = createClient();
+
+    let { data: products, error } = await supabase.from("test").select("*");
+    console.log(products);
+    if (error) throw error;
+    return { products };
+  };
+
+  return (
+    <main>
+      <form action={fetchProducts}>
+        <Button>Fetch Products</Button>
+      </form>
+    </main>
+  );
 }
