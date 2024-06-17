@@ -6,7 +6,7 @@ export default function Home() {
     "use server";
     const supabase = createClient();
 
-    let { data: products, error } = await supabase.from("test").select("*");
+    let { data: products, error } = await supabase.from("products").select("*");
     console.log(products);
     if (error) throw error;
     return { products };
